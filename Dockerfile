@@ -1,16 +1,10 @@
-FROM python:3
+FROM elenaalexandrovna/opencv-python3
 MAINTAINER Josip Janzic <josip.janzic@gmail.com>
 
 RUN apt-get update && apt-get upgrade -y
 
 RUN apt-get install -y python3-dev python3-numpy build-essential \
-        checkinstall cmake pkg-config yasm unzip
+        checkinstall cmake pkg-config yasm unzip python3-pip
 
-RUN cd && wget https://github.com/Itseez/opencv/archive/3.0.0.zip \
-        && unzip 3.0.0.zip \
-        && cd opencv-3.0.0 && mkdir build && cd build \
-        && cmake .. && make -j4 && make install \
-        && cd && rm -rf opencv-3.0.0 && rm 3.0.0.zip
-
-
-
+RUN ln -s /usr/bin/python3 /usr/bin/python
+RUN ln -s /usr/bin/pip3 /usr/bin/pip

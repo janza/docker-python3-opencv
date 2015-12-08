@@ -5,7 +5,7 @@ RUN apt-get update && apt-get upgrade -y
 
 RUN apt-get install -y python3-dev python3-numpy build-essential \
         checkinstall cmake pkg-config yasm unzip python3-pip \
-        libpq-dev
+        libpq-dev python3-flake8
 
 RUN ln -s /usr/bin/python3 /usr/bin/python
 RUN ln -s /usr/bin/pip3 /usr/bin/pip

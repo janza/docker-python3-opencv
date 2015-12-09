@@ -37,4 +37,4 @@ RUN wget https://github.com/Itseez/opencv/archive/3.0.0.zip \
 && rm -r /opencv-3.0.0
 
 RUN rm /usr/bin/python && ln -s /usr/bin/python3 /usr/bin/python
-RUN rm /usr/bin/pip && ln -s /usr/bin/pip3 /usr/bin/pip
+RUN ln -s /usr/bin/pip3 /usr/bin/pip

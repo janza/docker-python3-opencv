@@ -38,3 +38,4 @@ RUN wget https://github.com/Itseez/opencv/archive/3.0.0.zip \
 
 RUN rm /usr/bin/python && ln -s /usr/bin/python3 /usr/bin/python
 RUN ln -s /usr/bin/pip3 /usr/bin/pip
+RUN pip install flake8 --upgrade

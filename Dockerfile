@@ -1,4 +1,4 @@
-FROM ubuntu:15.04
+FROM python:3.5
 MAINTAINER Josip Janzic <josip.janzic@gmail.com>
 
 RUN apt-get update && \
@@ -11,10 +11,6 @@ RUN apt-get update && \
         yasm \
         pkg-config \
         libswscale-dev \
-        python3-dev \
-        python3-numpy \
-        python3-pip \
-        python3-flake8 \
         libtbb2 \
         libtbb-dev \
         libjpeg-dev \
@@ -22,20 +18,34 @@ RUN apt-get update && \
         libtiff-dev \
         libjasper-dev \
         libavformat-dev \
-        libpq-dev \
-        && apt-get -y clean all \
-        && rm -rf /var/lib/apt/lists/*
+        libpq-dev
+
+RUN pip install numpy
 
 WORKDIR /
 RUN wget https://github.com/Itseez/opencv/archive/3.0.0.zip \
 && unzip 3.0.0.zip \
 && mkdir /opencv-3.0.0/cmake_binary \
 && cd /opencv-3.0.0/cmake_binary \
-&& cmake .. \
+&& cmake -DBUILD_TIFF=ON \
+  -DBUILD_opencv_java=OFF \
+  -DWITH_CUDA=OFF \
+  -DENABLE_AVX=ON \
+  -DWITH_OPENGL=ON \
+  -DWITH_OPENCL=ON \
+  -DWITH_IPP=ON \
+  -DWITH_TBB=ON \
+  -DWITH_EIGEN=ON \
+  -DWITH_V4L=ON \
+  -DBUILD_TESTS=OFF \
+  -DBUILD_PERF_TESTS=OFF \
+  -DCMAKE_BUILD_TYPE=RELEASE \
+  -DCMAKE_INSTALL_PREFIX=$(python3.5 -c "import sys; print(sys.prefix)") \
+  -DPYTHON_EXECUTABLE=$(which python3.5) \
+  -DPYTHON_INCLUDE_DIR=$(python3.5 -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())") \
+  -DPYTHON_PACKAGES_PATH=$(python3.5 -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())") .. \
 && make install \
 && rm /3.0.0.zip \
 && rm -r /opencv-3.0.0
 
-RUN rm /usr/bin/python && ln -s /usr/bin/python3 /usr/bin/python
-RUN ln -s /usr/bin/pip3 /usr/bin/pip
 RUN pip install flake8 pep8 --upgrade

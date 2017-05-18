@@ -23,12 +23,17 @@ RUN apt-get update && \
 RUN pip install numpy
 
 WORKDIR /
+RUN wget https://github.com/opencv/opencv_contrib/archive/3.2.0.zip \
+&& unzip 3.2.0.zip \
+&& rm 3.2.0.zip
+
 RUN wget https://github.com/Itseez/opencv/archive/3.2.0.zip \
 && unzip 3.2.0.zip \
 && mkdir /opencv-3.2.0/cmake_binary \
 && cd /opencv-3.2.0/cmake_binary \
 && cmake -DBUILD_TIFF=ON \
   -DBUILD_opencv_java=OFF \
+  -DOPENCV_EXTRA_MODULES_PATH=/opencv_contrib-3.2.0/modules \
   -DWITH_CUDA=OFF \
   -DENABLE_AVX=ON \
   -DWITH_OPENGL=ON \
@@ -46,6 +51,7 @@ RUN wget https://github.com/Itseez/opencv/archive/3.2.0.zip \
   -DPYTHON_PACKAGES_PATH=$(python3.6 -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())") .. \
 && make install \
 && rm /3.2.0.zip \
-&& rm -r /opencv-3.2.0
+&& rm -r /opencv-3.2.0 \
+&& rm -r /opencv_contrib-3.2.0
 
 RUN pip install flake8 pep8 --upgrade

@@ -23,7 +23,7 @@ RUN apt-get update && \
 RUN pip install numpy
 
 WORKDIR /
-RUN wget https://github.com/Itseez/opencv/archive/3.2.0.zip \
+RUN wget https://github.com/opencv/opencv/archive/3.2.0.zip \
 && unzip 3.2.0.zip \
 && mkdir /opencv-3.2.0/cmake_binary \
 && cd /opencv-3.2.0/cmake_binary \

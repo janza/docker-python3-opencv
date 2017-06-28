@@ -47,5 +47,3 @@ RUN wget https://github.com/opencv/opencv/archive/3.2.0.zip \
 && make install \
 && rm /3.2.0.zip \
 && rm -r /opencv-3.2.0
-
-RUN pip install flake8 pep8 --upgrade

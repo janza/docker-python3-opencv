@@ -12,6 +12,6 @@ Image tagged with `:contrib` contains docker image built with [contrib modules](
 List of available docker tags:
 
 - `opencv-3.3.0` (`latest`)
-- `contrib-opencv-3.3.0`
+- `contrib-opencv-3.3.0` (`contrib`)
 - `opencv-3.2.0`
 - `contrib-opencv-3.2.0`

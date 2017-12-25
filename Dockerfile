@@ -23,17 +23,18 @@ RUN apt-get update && \
 RUN pip install numpy
 
 WORKDIR /
-RUN wget https://github.com/opencv/opencv_contrib/archive/3.3.0.zip \
-&& unzip 3.3.0.zip \
-&& rm 3.3.0.zip
+ENV OPENCV_VERSION="3.4.0"
+RUN wget https://github.com/opencv/opencv_contrib/archive/${OPENCV_VERSION}.zip \
+&& unzip ${OPENCV_VERSION}.zip \
+&& rm ${OPENCV_VERSION}.zip
 
-RUN wget https://github.com/opencv/opencv/archive/3.3.0.zip \
-&& unzip 3.3.0.zip \
-&& mkdir /opencv-3.3.0/cmake_binary \
-&& cd /opencv-3.3.0/cmake_binary \
+RUN wget https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip \
+&& unzip ${OPENCV_VERSION}.zip \
+&& mkdir /opencv-${OPENCV_VERSION}/cmake_binary \
+&& cd /opencv-${OPENCV_VERSION}/cmake_binary \
 && cmake -DBUILD_TIFF=ON \
   -DBUILD_opencv_java=OFF \
-  -DOPENCV_EXTRA_MODULES_PATH=/opencv_contrib-3.3.0/modules \
+  -DOPENCV_EXTRA_MODULES_PATH=/opencv_contrib-${OPENCV_VERSION}/modules \
   -DWITH_CUDA=OFF \
   -DENABLE_AVX=ON \
   -DWITH_OPENGL=ON \
@@ -50,5 +51,5 @@ RUN wget https://github.com/opencv/opencv/archive/3.3.0.zip \
   -DPYTHON_INCLUDE_DIR=$(python3.6 -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())") \
   -DPYTHON_PACKAGES_PATH=$(python3.6 -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())") .. \
 && make install \
-&& rm /3.3.0.zip \
-&& rm -r /opencv-3.3.0
+&& rm /${OPENCV_VERSION}.zip \
+&& rm -r /opencv-${OPENCV_VERSION}

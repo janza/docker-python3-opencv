@@ -13,5 +13,7 @@ List of available docker tags:
 
 - `opencv-3.4.0` (`latest`)
 - `contrib-opencv-3.4.0` (`contrib`)
+- `opencv-3.3.0`
+- `contrib-opencv-3.3.0`
 - `opencv-3.2.0`
 - `contrib-opencv-3.2.0`

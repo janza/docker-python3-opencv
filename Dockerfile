@@ -24,8 +24,11 @@ RUN pip install numpy
 
 WORKDIR /
 ENV OPENCV_VERSION="3.4.0"
+ENV OPENCV_CONTRIB="opencv_contrib"
 RUN wget https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip \
+&& wget -O ${OPENCV_CONTRIB}-${OPENCV_VERSION}.zip https://github.com/opencv/${OPENCV_CONTRIB}/archive/${OPENCV_VERSION}.zip \
 && unzip ${OPENCV_VERSION}.zip \
+&& unzip ${OPENCV_CONTRIB}-${OPENCV_VERSION}.zip \
 && mkdir /opencv-${OPENCV_VERSION}/cmake_binary \
 && cd /opencv-${OPENCV_VERSION}/cmake_binary \
 && cmake -DBUILD_TIFF=ON \
@@ -44,7 +47,10 @@ RUN wget https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip \
   -DCMAKE_INSTALL_PREFIX=$(python3.6 -c "import sys; print(sys.prefix)") \
   -DPYTHON_EXECUTABLE=$(which python3.6) \
   -DPYTHON_INCLUDE_DIR=$(python3.6 -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())") \
-  -DPYTHON_PACKAGES_PATH=$(python3.6 -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())") .. \
+  -DPYTHON_PACKAGES_PATH=$(python3.6 -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())") \
+  -DOPENCV_EXTRA_MODULES_PATH=/${OPENCV_CONTRIB}-${OPENCV_VERSION}/modules .. \
 && make install \
 && rm /${OPENCV_VERSION}.zip \
-&& rm -r /opencv-${OPENCV_VERSION}
+&& rm /${OPENCV_CONTRIB}-${OPENCV_VERSION}.zip \
+&& rm -r /opencv-${OPENCV_VERSION} \
+&& rm -r /${OPENCV_CONTRIB}-${OPENCV_VERSION}

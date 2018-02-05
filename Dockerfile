@@ -20,10 +20,11 @@ RUN apt-get update && \
         libavformat-dev \
         libpq-dev
 
-RUN pip install numpy
+RUN pip --proxy http://172.16.2.30:8080 install numpy
 
 WORKDIR /
 ENV OPENCV_VERSION="3.4.0"
+
 RUN wget https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip \
 && unzip ${OPENCV_VERSION}.zip \
 && mkdir /opencv-${OPENCV_VERSION}/cmake_binary \

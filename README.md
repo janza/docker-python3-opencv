@@ -2,9 +2,13 @@
 
 Docker image with python 3.6 and opencv 3.4
 
+Build with `docker image build --build-arg http_proxy=http://172.16.2.30:8080 --build-arg https_proxy=http://172.16.2.30:8080 .`
+
+Proxy has been set for IIT KGP Campus
+
 Usage:
 
-    docker run -it jjanzic/docker-python3-opencv python
+    docker run -it dibyadas/python3-opencv3 python
     >>> import cv2
 
 Image tagged with `:contrib` contains docker image built with [contrib modules](https://github.com/opencv/opencv_contrib/)

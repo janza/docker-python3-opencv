@@ -23,7 +23,7 @@ RUN apt-get update && \
 RUN pip install numpy
 
 WORKDIR /
-ENV OPENCV_VERSION="3.4.0"
+ENV OPENCV_VERSION="3.4.1"
 RUN wget https://github.com/opencv/opencv_contrib/archive/${OPENCV_VERSION}.zip \
 && unzip ${OPENCV_VERSION}.zip \
 && rm ${OPENCV_VERSION}.zip

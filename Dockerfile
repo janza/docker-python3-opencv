@@ -30,7 +30,6 @@ RUN wget https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip \
 && cmake -DBUILD_TIFF=ON \
   -DBUILD_opencv_java=OFF \
   -DWITH_CUDA=OFF \
-  -DENABLE_AVX=ON \
   -DWITH_OPENGL=ON \
   -DWITH_OPENCL=ON \
   -DWITH_IPP=ON \

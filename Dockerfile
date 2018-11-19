@@ -22,7 +22,7 @@ RUN apt-get update && \
 RUN pip install numpy
 
 WORKDIR /
-ENV OPENCV_VERSION="3.4.2"
+ENV OPENCV_VERSION="4.0.0"
 RUN wget https://github.com/opencv/opencv_contrib/archive/${OPENCV_VERSION}.zip \
 && unzip ${OPENCV_VERSION}.zip \
 && rm ${OPENCV_VERSION}.zip
@@ -34,7 +34,6 @@ RUN wget https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip \
   -DBUILD_opencv_java=OFF \
   -DOPENCV_EXTRA_MODULES_PATH=/opencv_contrib-${OPENCV_VERSION}/modules \
   -DWITH_CUDA=OFF \
-  -DENABLE_AVX=ON \
   -DWITH_OPENGL=ON \
   -DWITH_OPENCL=ON \
   -DWITH_IPP=ON \

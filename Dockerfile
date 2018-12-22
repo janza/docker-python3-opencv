@@ -1,8 +1,8 @@
 FROM python:3.7
 MAINTAINER Josip Janzic <josip@jjanzic.com>
 
-RUN apt-get update && \
-        apt-get install -y \
+RUN apt-get update \
+    && apt-get install -y \
         build-essential \
         cmake \
         git \
@@ -17,7 +17,8 @@ RUN apt-get update && \
         libpng-dev \
         libtiff-dev \
         libavformat-dev \
-        libpq-dev
+        libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN pip install numpy
 

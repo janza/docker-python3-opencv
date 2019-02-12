@@ -23,7 +23,7 @@ RUN apt-get update \
 RUN pip install numpy
 
 WORKDIR /
-ENV OPENCV_VERSION="4.0.0"
+ENV OPENCV_VERSION="4.0.1"
 RUN wget https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip \
 && unzip ${OPENCV_VERSION}.zip \
 && mkdir /opencv-${OPENCV_VERSION}/cmake_binary \
@@ -47,7 +47,7 @@ RUN wget https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip \
   .. \
 && make install \
 && rm /${OPENCV_VERSION}.zip \
-&& rm -r /opencv-${OPENCV_VERSION} 
+&& rm -r /opencv-${OPENCV_VERSION}
 RUN ln -s \
   /usr/local/python/cv2/python-3.7/cv2.cpython-37m-x86_64-linux-gnu.so \
   /usr/local/lib/python3.7/site-packages/cv2.so

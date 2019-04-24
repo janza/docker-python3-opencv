@@ -1,8 +1,8 @@
 FROM python:3.7
 MAINTAINER Josip Janzic <josip@jjanzic.com>
 
-RUN apt-get update && \
-        apt-get install -y \
+RUN apt-get update \
+    && apt-get install -y \
         build-essential \
         cmake \
         git \
@@ -17,7 +17,8 @@ RUN apt-get update && \
         libpng-dev \
         libtiff-dev \
         libavformat-dev \
-        libpq-dev
+        libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN pip install numpy
 
@@ -51,3 +52,6 @@ RUN wget https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip \
 && make install \
 && rm /${OPENCV_VERSION}.zip \
 && rm -r /opencv-${OPENCV_VERSION}
+RUN ln -s \
+  /usr/local/python/cv2/python-3.7/cv2.cpython-37m-x86_64-linux-gnu.so \
+  /usr/local/lib/python3.7/site-packages/cv2.so

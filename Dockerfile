@@ -43,6 +43,7 @@ RUN wget https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip \
   -DWITH_V4L=ON \
   -DBUILD_TESTS=OFF \
   -DBUILD_PERF_TESTS=OFF \
+  -DOPENCV_ENABLE_NONFREE=ON \
   -DCMAKE_BUILD_TYPE=RELEASE \
   -DCMAKE_INSTALL_PREFIX=$(python3.7 -c "import sys; print(sys.prefix)") \
   -DPYTHON_EXECUTABLE=$(which python3.7) \
